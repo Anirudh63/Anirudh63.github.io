@@ -17,6 +17,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Button } from "@/components/ui/button";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import SpotlightCard from "@/components/SpotlightCard";
+import cachedCodingStats from "@/data/coding-stats.json";
 
 interface CodingStatsData {
   leetcode: {
@@ -48,7 +49,7 @@ interface CodingStatsData {
   combinedCalendar: Record<string, number>;
 }
 
-const defaultStats: CodingStatsData = {
+const fallbackStats: CodingStatsData = {
   leetcode: {
     username: "anirudh_dhage",
     profileUrl: "https://leetcode.com/u/anirudh_dhage/",
@@ -78,27 +79,55 @@ const defaultStats: CodingStatsData = {
   combinedCalendar: {},
 };
 
+const defaultStats: CodingStatsData = (cachedCodingStats as unknown as CodingStatsData) || fallbackStats;
+
 type CalendarMode = "combined" | "leetcode" | "codeforces";
 
 export default function CodingActivity() {
   const [stats, setStats] = useState<CodingStatsData>(defaultStats);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const currentYear = new Date().getFullYear();
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
   const [calendarMode, setCalendarMode] = useState<CalendarMode>("combined");
 
   useEffect(() => {
-    fetch("/api/coding-stats")
-      .then((res) => (res.ok ? res.json() : defaultStats))
-      .then((data: CodingStatsData) => {
-        if (data.leetcode && data.codeforces) {
-          setStats(data);
+    async function fetchLatestStats() {
+      try {
+        let res = await fetch("/api/coding-stats");
+        if (!res.ok) {
+          res = await fetch("/data/coding-stats.json");
         }
-      })
-      .catch(() => {
-        setStats(defaultStats);
-      })
-      .finally(() => setLoading(false));
+        if (res.ok) {
+          const data: CodingStatsData = await res.json();
+          if (data?.leetcode && data?.codeforces) {
+            setStats((prev) => {
+              const hasNewCombined = data.combinedCalendar && Object.keys(data.combinedCalendar).length > 0;
+              const hasNewLc = data.leetcode.calendar && Object.keys(data.leetcode.calendar).length > 0;
+              const hasNewCf = data.codeforces.calendar && Object.keys(data.codeforces.calendar).length > 0;
+
+              return {
+                ...data,
+                combinedCalendar: hasNewCombined ? data.combinedCalendar : prev.combinedCalendar,
+                leetcode: {
+                  ...data.leetcode,
+                  calendar: hasNewLc ? data.leetcode.calendar : prev.leetcode.calendar,
+                },
+                codeforces: {
+                  ...data.codeforces,
+                  calendar: hasNewCf ? data.codeforces.calendar : prev.codeforces.calendar,
+                },
+              };
+            });
+          }
+        }
+      } catch {
+        // Fallback remains active
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchLatestStats();
   }, []);
 
   const { leetcode, codeforces, combinedCalendar } = stats;

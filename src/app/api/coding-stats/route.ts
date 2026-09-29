@@ -1,14 +1,45 @@
 import { NextResponse } from "next/server";
+import cachedStats from "@/data/coding-stats.json";
 
 export const runtime = "nodejs";
 export const dynamic = "force-static";
 export const revalidate = 1800; // Cache for 30 minutes
 
+interface CodingStatsResponse {
+  leetcode: {
+    username: string;
+    profileUrl: string;
+    totalSolved: number;
+    totalQuestions: number;
+    easySolved: number;
+    mediumSolved: number;
+    hardSolved: number;
+    ranking: number;
+    streak: number;
+    totalActiveDays: number;
+    calendar: Record<string, number>;
+  };
+  codeforces: {
+    handle: string;
+    profileUrl: string;
+    rating: number;
+    maxRating: number;
+    rank: string;
+    maxRank: string;
+    organization: string;
+    city: string;
+    country: string;
+    contribution: number;
+    calendar: Record<string, number>;
+  };
+  combinedCalendar: Record<string, number>;
+}
+
 export async function GET() {
   const leetcodeUser = "anirudh_dhage";
   const codeforcesUser = "DestructorX";
 
-  const fallbackData = {
+  const fallbackData: CodingStatsResponse = (cachedStats as unknown as CodingStatsResponse) || {
     leetcode: {
       username: leetcodeUser,
       profileUrl: `https://leetcode.com/u/${leetcodeUser}/`,
@@ -20,7 +51,7 @@ export async function GET() {
       ranking: 100006,
       streak: 25,
       totalActiveDays: 153,
-      calendar: {} as Record<string, number>,
+      calendar: {},
     },
     codeforces: {
       handle: codeforcesUser,
@@ -33,9 +64,9 @@ export async function GET() {
       city: "Pune",
       country: "India",
       contribution: 8,
-      calendar: {} as Record<string, number>,
+      calendar: {},
     },
-    combinedCalendar: {} as Record<string, number>,
+    combinedCalendar: {},
   };
 
   try {
@@ -161,10 +192,15 @@ export async function GET() {
       }
     }
 
+    const finalLcCal = Object.keys(lcCalendar).length > 0 ? lcCalendar : (fallbackData.leetcode?.calendar || {});
+    const finalCfCal = Object.keys(cfCalendar).length > 0 ? cfCalendar : (fallbackData.codeforces?.calendar || {});
+    leetcodeData.calendar = finalLcCal;
+    codeforcesData.calendar = finalCfCal;
+
     // Build combined calendar
-    const combinedCalendar: Record<string, number> = { ...lcCalendar };
-    for (const [dateKey, count] of Object.entries(cfCalendar)) {
-      combinedCalendar[dateKey] = (combinedCalendar[dateKey] || 0) + count;
+    const combinedCalendar: Record<string, number> = { ...finalLcCal };
+    for (const [dateKey, count] of Object.entries(finalCfCal)) {
+      combinedCalendar[dateKey] = (combinedCalendar[dateKey] || 0) + Number(count);
     }
 
     const response = NextResponse.json(
