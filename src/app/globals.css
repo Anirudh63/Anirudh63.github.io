@@ -1,0 +1,930 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+@custom-variant dark (&:is(.dark *));
+
+.pixelated-font {
+    font-family: "Press Start 2P", cursive;
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+@keyframes aurora-bg {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.aurora-background {
+    background: radial-gradient(ellipse at top, #1b2735 0%, #090a0f 100%);
+    /* For a more colorful option, try this:
+  background: linear-gradient(-45deg, #0c0c0d, #1a1a2e, #16213e, #0f3460);
+  background-size: 400% 400%;
+  animation: aurora-bg 15s ease infinite;
+  */
+}
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* --- Animated Gradient Text for your Name --- */
+@keyframes gradient-text {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.gradient-text {
+    background: linear-gradient(to right, #ffffff, #a7a7a7, #ffffff);
+    background-size: 200% 200%;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: gradient-text 5s ease infinite;
+}
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+    --radius: 0.625rem;
+    --background: oklch(0.975 0.004 85);
+    --foreground: oklch(0.129 0.042 264.695);
+    --card: oklch(0.992 0.003 85);
+    --card-foreground: oklch(0.129 0.042 264.695);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.129 0.042 264.695);
+    --primary: oklch(0.208 0.042 265.755);
+    --primary-foreground: oklch(0.984 0.003 247.858);
+    --secondary: oklch(0.968 0.007 247.896);
+    --secondary-foreground: oklch(0.208 0.042 265.755);
+    --muted: oklch(0.968 0.007 247.896);
+    --muted-foreground: oklch(0.554 0.046 257.417);
+    --accent: oklch(0.968 0.007 247.896);
+    --accent-foreground: oklch(0.208 0.042 265.755);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0 0 0 / 12%);
+    --input: oklch(0.929 0.013 255.508);
+    --ring: oklch(0.704 0.04 256.788);
+    --chart-1: oklch(0.646 0.222 41.116);
+    --chart-2: oklch(0.6 0.118 184.704);
+    --chart-3: oklch(0.398 0.07 227.392);
+    --chart-4: oklch(0.828 0.189 84.429);
+    --chart-5: oklch(0.769 0.188 70.08);
+    --sidebar: oklch(0.984 0.003 247.858);
+    --sidebar-foreground: oklch(0.129 0.042 264.695);
+    --sidebar-primary: oklch(0.208 0.042 265.755);
+    --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+    --sidebar-accent: oklch(0.968 0.007 247.896);
+    --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+    --sidebar-border: oklch(0.929 0.013 255.508);
+    --sidebar-ring: oklch(0.704 0.04 256.788);
+}
+
+.dark {
+    --background: oklch(0.075 0.008 260);
+
+    --foreground: oklch(0.984 0.003 247.858);
+    --card: oklch(0.105 0.012 260);
+    --card-foreground: oklch(0.984 0.003 247.858);
+    --popover: oklch(0.105 0.012 260);
+    --popover-foreground: oklch(0.984 0.003 247.858);
+    --primary: oklch(0.929 0.013 255.508);
+    --primary-foreground: oklch(0.208 0.042 265.755);
+    --secondary: oklch(0.279 0.041 260.031);
+    --secondary-foreground: oklch(0.984 0.003 247.858);
+    --muted: oklch(0.279 0.041 260.031);
+    --muted-foreground: oklch(0.704 0.04 256.788);
+    --accent: oklch(0.279 0.041 260.031);
+    --accent-foreground: oklch(0.984 0.003 247.858);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 14%);
+    --input: oklch(1 0 0 / 15%);
+    --sidebar-ring: oklch(0.551 0.027 264.364);
+    --chart-1: oklch(0.488 0.243 264.376);
+    --chart-2: oklch(0.696 0.17 162.48);
+    --chart-3: oklch(0.769 0.188 70.08);
+    --chart-4: oklch(0.627 0.265 303.9);
+    --chart-5: oklch(0.645 0.246 16.439);
+    --sidebar: oklch(0.105 0.012 260);
+    --sidebar-foreground: oklch(0.984 0.003 247.858);
+}
+
+/* ========================================
+   GLOBAL OVERFLOW & RESPONSIVE FIXES
+   ======================================== */
+
+* {
+    /* Prevent horizontal overflow globally */
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Ensure marquee animations don't cause overflow */
+.marquee-mask {
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+    );
+}
+
+/* Responsive container utilities */
+.container-responsive {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+    .container-responsive {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container-responsive {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+/* Text truncation utilities */
+.truncate-2-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.truncate-3-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground transition-colors duration-300;
+        /* Interactive cursor-following spotlight effect */
+        background-image:
+            radial-gradient(
+                circle at 1px 1px,
+                rgba(255, 255, 255, 0.095) 1px,
+                transparent 0
+            ),
+            radial-gradient(
+                600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(120, 119, 198, 0.16),
+                transparent 80%
+            );
+        background-size:
+            22px 22px,
+            100% 100%;
+    }
+
+    /* Light theme adjustments */
+    html:not(.dark) body {
+        background-image:
+            radial-gradient(
+                circle at 1px 1px,
+                rgba(0, 0, 0, 0.035) 1px,
+                transparent 0
+            ),
+            radial-gradient(
+                600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(120, 119, 198, 0.08),
+                transparent 80%
+            );
+        background-size:
+            22px 22px,
+            100% 100%;
+    }
+
+    /* Initialize CSS custom properties for mouse position */
+    :root {
+        --mouse-x: 50%;
+        --mouse-y: 50%;
+    }
+}
+
+/* Custom text selection highlight (turquoise accent) */
+::selection {
+    background-color: #06b6d4; /* Tailwind cyan-500 vibe */
+    color: #ffffff;
+}
+
+/* Theme-aware text color utilities */
+.text-theme-primary {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+:root:not(.dark) .text-theme-primary,
+html:not(.dark) .text-theme-primary {
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.text-theme-secondary {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+:root:not(.dark) .text-theme-secondary,
+html:not(.dark) .text-theme-secondary {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.text-theme-muted {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+:root:not(.dark) .text-theme-muted,
+html:not(.dark) .text-theme-muted {
+    color: rgba(0, 0, 0, 0.38);
+}
+
+/* Theme-aware background utilities */
+.bg-theme-surface {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+:root:not(.dark) .bg-theme-surface,
+html:not(.dark) .bg-theme-surface {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.bg-theme-card {
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+:root:not(.dark) .bg-theme-card,
+html:not(.dark) .bg-theme-card {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Theme-aware border utilities */
+.border-theme {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+:root:not(.dark) .border-theme,
+html:not(.dark) .border-theme {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Marquee animations */
+@keyframes marquee-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+@keyframes marquee-right {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-in-out {
+    0%,
+    100% {
+        opacity: 0.25;
+    }
+    20%,
+    60% {
+        opacity: 1;
+    }
+}
+
+/* Soft gradient mask on edges */
+.marquee-mask:before,
+.marquee-mask:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+.marquee-mask:before {
+    left: 0;
+    background: linear-gradient(
+        to right,
+        rgba(10, 10, 10, 0.9),
+        rgba(10, 10, 10, 0)
+    );
+}
+.marquee-mask:after {
+    right: 0;
+    background: linear-gradient(
+        to left,
+        rgba(10, 10, 10, 0.9),
+        rgba(10, 10, 10, 0)
+    );
+}
+
+/* Light mode marquee masks */
+:root:not(.dark) .marquee-mask:before,
+html:not(.dark) .marquee-mask:before {
+    background: linear-gradient(
+        to right,
+        rgba(250, 250, 250, 0.9),
+        rgba(250, 250, 250, 0)
+    );
+}
+
+:root:not(.dark) .marquee-mask:after,
+html:not(.dark) .marquee-mask:after {
+    background: linear-gradient(
+        to left,
+        rgba(250, 250, 250, 0.9),
+        rgba(250, 250, 250, 0)
+    );
+}
+
+/* Living dossier layout */
+.page-shell {
+    position: relative;
+    border-left: 1px solid color-mix(in oklch, var(--border) 80%, transparent);
+    border-right: 1px solid color-mix(in oklch, var(--border) 80%, transparent);
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0,
+            transparent calc(100% - 1px),
+            color-mix(in oklch, var(--border) 55%, transparent) calc(100% - 1px)
+        ),
+        color-mix(in oklch, var(--card) 40%, var(--background));
+}
+
+.page-shell::before,
+.page-shell::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 38px;
+    pointer-events: none;
+    opacity: 0.7;
+    background-image: repeating-linear-gradient(
+        135deg,
+        color-mix(in oklch, var(--border) 75%, transparent) 0,
+        color-mix(in oklch, var(--border) 75%, transparent) 1px,
+        transparent 1px,
+        transparent 8px
+    );
+}
+
+.page-shell::before {
+    left: -39px;
+    border-left: 1px solid color-mix(in oklch, var(--border) 60%, transparent);
+}
+
+.page-shell::after {
+    right: -39px;
+    border-right: 1px solid color-mix(in oklch, var(--border) 60%, transparent);
+}
+
+.section-block {
+    position: relative;
+    padding: 4rem 1.5rem;
+    border-top: 1px solid color-mix(in oklch, var(--border) 90%, transparent);
+}
+
+.section-block:nth-child(even) {
+    background-color: color-mix(in oklch, var(--card) 16%, transparent);
+}
+
+.section-block + .section-block {
+    padding-top: 6.5rem;
+    background-image:
+        linear-gradient(
+            to right,
+            color-mix(in oklch, var(--border) 90%, transparent),
+            color-mix(in oklch, var(--border) 90%, transparent)
+        ),
+        repeating-linear-gradient(
+            135deg,
+            color-mix(in oklch, var(--border) 70%, transparent) 0,
+            color-mix(in oklch, var(--border) 70%, transparent) 1px,
+            transparent 1px,
+            transparent 8px
+        ),
+        linear-gradient(
+            to right,
+            color-mix(in oklch, var(--border) 75%, transparent),
+            color-mix(in oklch, var(--border) 75%, transparent)
+        );
+    background-position: top, top, 0 28px;
+    background-repeat: no-repeat;
+    background-size: 100% 1px, 100% 29px, 100% 1px;
+}
+
+.section-block::before,
+.section-block::after {
+    content: "+";
+    position: absolute;
+    top: -13px;
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+    font-size: 18px;
+    line-height: 1;
+    color: color-mix(in oklch, var(--foreground) 35%, transparent);
+}
+
+.section-block::before {
+    left: -7px;
+}
+
+.section-block::after {
+    right: -7px;
+}
+
+.section-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: color-mix(in oklch, var(--foreground) 42%, transparent);
+}
+
+.section-kicker::after {
+    content: "";
+    height: 1px;
+    width: 2rem;
+    background: color-mix(in oklch, var(--border) 80%, transparent);
+}
+
+.section-heading {
+    max-width: 44rem;
+    font-size: clamp(1.35rem, 3.2vw, 2.05rem);
+    line-height: 1.05;
+    letter-spacing: 0;
+    font-weight: 650;
+    color: var(--foreground);
+}
+
+.hero-banner {
+    position: relative;
+    height: clamp(7rem, 18vw, 12rem);
+    overflow: hidden;
+    border: 1px solid color-mix(in oklch, var(--border) 80%, transparent);
+    border-radius: 0.4rem;
+    background: color-mix(in oklch, var(--card) 35%, transparent);
+}
+
+
+@media (max-width: 640px) {
+    .page-shell {
+        border-left: 0;
+        border-right: 0;
+    }
+
+    .page-shell::before,
+    .page-shell::after,
+    .section-block::before,
+    .section-block::after {
+        display: none;
+    }
+
+    .section-block {
+        padding: 3rem 0.25rem;
+    }
+}
+
+/* ========================================
+   PREMIUM ANIMATION EFFECTS
+   ======================================== */
+
+/* Animated gradient text for the hero name */
+@keyframes shimmer-gradient {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+.hero-name-gradient {
+    background: linear-gradient(
+        90deg,
+        var(--foreground) 0%,
+        var(--foreground) 35%,
+        oklch(0.78 0.18 260) 50%,
+        var(--foreground) 65%,
+        var(--foreground) 100%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer-gradient 6s ease-in-out infinite;
+}
+
+.dark .hero-name-gradient {
+    background: linear-gradient(
+        90deg,
+        oklch(0.98 0.003 248) 0%,
+        oklch(0.98 0.003 248) 35%,
+        oklch(0.78 0.18 260) 50%,
+        oklch(0.98 0.003 248) 65%,
+        oklch(0.98 0.003 248) 100%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer-gradient 6s ease-in-out infinite;
+}
+
+/* Ambient glow ring around the avatar */
+@keyframes avatar-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px -6px oklch(0.65 0.18 260 / 0),
+                    0 0 40px -10px oklch(0.65 0.18 260 / 0);
+    }
+    50% {
+        box-shadow: 0 0 20px -6px oklch(0.65 0.18 260 / 0.25),
+                    0 0 40px -10px oklch(0.65 0.18 260 / 0.12);
+    }
+}
+
+.avatar-glow-ring {
+    animation: avatar-glow 4s ease-in-out infinite;
+}
+
+/* Magnetic link underline animation */
+.link-magnetic {
+    position: relative;
+    overflow: hidden;
+}
+
+.link-magnetic::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, #06b6d4, #8b5cf6);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-magnetic:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Glowing accent line for section dividers */
+@keyframes glow-slide {
+    0% { transform: translateX(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateX(200%); opacity: 0; }
+}
+
+.section-block::before {
+    content: "+";
+}
+
+.section-glow-line {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-glow-line::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, oklch(0.65 0.18 260 / 0.5), transparent);
+    animation: glow-slide 4s ease-in-out infinite;
+}
+
+/* Card tilt shine effect on hover */
+@keyframes card-shine {
+    0% { transform: translateX(-100%) rotate(12deg); }
+    100% { transform: translateX(200%) rotate(12deg); }
+}
+
+.card-shine-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-shine-effect::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.03),
+        transparent
+    );
+    transform: translateX(-100%) rotate(12deg);
+    transition: none;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.card-shine-effect:hover::before {
+    animation: card-shine 0.8s ease-out forwards;
+}
+
+/* Smooth fade-in for staggered children */
+@keyframes fade-up-in {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-up {
+    animation: fade-up-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Status dot pulse (for live indicators) */
+@keyframes status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.6); }
+}
+
+.status-dot-pulse {
+    animation: status-pulse 2s ease-in-out infinite;
+}
+
+/* Floating animation for decorative elements */
+@keyframes gentle-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+}
+
+.animate-gentle-float {
+    animation: gentle-float 5s ease-in-out infinite;
+}
+
+/* Badge glow pulse for achievements */
+@keyframes badge-glow {
+    0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+    50% { box-shadow: 0 0 12px -3px currentColor; opacity: 0.85; }
+}
+
+.badge-glow {
+    animation: badge-glow 3s ease-in-out infinite;
+}
+
+/* Stagger delay utilities for children */
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+
+/* ========================================
+   COMPETITIVE PROGRAMMING CARD EFFECTS
+   ======================================== */
+
+/* Flame flicker animation for streak */
+@keyframes flame-flicker {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        filter: drop-shadow(0 0 3px rgba(245, 158, 11, 0.4));
+    }
+    25% {
+        transform: scale(1.12) rotate(-3deg);
+        filter: drop-shadow(0 0 7px rgba(245, 158, 11, 0.7));
+    }
+    50% {
+        transform: scale(1.05) rotate(2deg);
+        filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.6));
+    }
+    75% {
+        transform: scale(1.15) rotate(-1deg);
+        filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.8));
+    }
+}
+
+.animate-flame {
+    animation: flame-flicker 2.5s ease-in-out infinite;
+    display: inline-block;
+}
+
+/* Star shimmer wave for CodeChef 4-star badge */
+@keyframes star-pulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(0.95);
+        color: #f59e0b;
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.25);
+        color: #fbbf24;
+        filter: drop-shadow(0 0 6px #f59e0b);
+    }
+}
+
+.star-shimmer-1 { animation: star-pulse 2s ease-in-out infinite 0s; }
+.star-shimmer-2 { animation: star-pulse 2s ease-in-out infinite 0.25s; }
+.star-shimmer-3 { animation: star-pulse 2s ease-in-out infinite 0.5s; }
+.star-shimmer-4 { animation: star-pulse 2s ease-in-out infinite 0.75s; }
+
+/* Codeforces Expert Blue Aura */
+@keyframes cf-expert-aura {
+    0%, 100% {
+        box-shadow: 0 0 15px -4px rgba(31, 138, 203, 0.25),
+                    inset 0 0 15px -4px rgba(31, 138, 203, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 25px -2px rgba(31, 138, 203, 0.45),
+                    inset 0 0 20px -2px rgba(31, 138, 203, 0.2);
+    }
+}
+
+.cf-expert-card:hover {
+    animation: cf-expert-aura 3s ease-in-out infinite;
+}
+
+/* LeetCode Amber Aura */
+@keyframes lc-amber-aura {
+    0%, 100% {
+        box-shadow: 0 0 15px -4px rgba(255, 161, 22, 0.25),
+                    inset 0 0 15px -4px rgba(255, 161, 22, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 25px -2px rgba(255, 161, 22, 0.45),
+                    inset 0 0 20px -2px rgba(255, 161, 22, 0.2);
+    }
+}
+
+.lc-amber-card:hover {
+    animation: lc-amber-aura 3s ease-in-out infinite;
+}
+
+/* CodeChef Amber/Gold Aura */
+@keyframes cc-gold-aura {
+    0%, 100% {
+        box-shadow: 0 0 15px -4px rgba(245, 158, 11, 0.25),
+                    inset 0 0 15px -4px rgba(245, 158, 11, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 25px -2px rgba(245, 158, 11, 0.45),
+                    inset 0 0 20px -2px rgba(245, 158, 11, 0.2);
+    }
+}
+
+.cc-gold-card:hover {
+    animation: cc-gold-aura 3s ease-in-out infinite;
+}
+
+/* Progress bar shimmer */
+@keyframes bar-shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+}
+
+.progress-bar-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar-shimmer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: bar-shimmer 2.5s ease-in-out infinite;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .hero-name-gradient,
+    .avatar-glow-ring,
+    .animate-gentle-float,
+    .badge-glow,
+    .status-dot-pulse {
+        animation: none !important;
+    }
+
+    .link-magnetic::after {
+        transition: none !important;
+    }
+
+    .card-shine-effect::before {
+        animation: none !important;
+    }
+
+    .section-glow-line::after {
+        animation: none !important;
+    }
+}
