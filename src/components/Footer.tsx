@@ -45,10 +45,14 @@ export const Footer = () => {
             <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-emerald-500/70">
               You reached the end
             </p>
-            <h2 className="mt-4 max-w-2xl text-4xl font-semibold leading-[1.05] tracking-[-0.035em] text-foreground sm:text-5xl">
-              Still curious?
-              <span className="block text-foreground/35">Good. So am I.</span>
+            <h2 className="mt-4 max-w-2xl text-3xl font-semibold leading-[1.15] tracking-[-0.03em] text-foreground sm:text-4xl md:text-5xl">
+              “As long as I&apos;m alive,
+              <span className="block text-foreground/35">there are infinite chances!”</span>
             </h2>
+            <p className="mt-3 font-mono text-xs text-foreground/45 flex items-center gap-2">
+              <span className="inline-block h-px w-6 bg-foreground/30" />
+              Monkey D. Luffy
+            </p>
           </motion.div>
 
           <motion.div
