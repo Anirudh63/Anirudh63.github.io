@@ -596,6 +596,8 @@ html:not(.dark) .marquee-mask:after {
 }
 
 .hero-name-gradient {
+    display: inline-block;
+    padding-bottom: 0.15em;
     background: linear-gradient(
         90deg,
         var(--foreground) 0%,

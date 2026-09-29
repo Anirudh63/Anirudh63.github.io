@@ -215,7 +215,7 @@ function Hero() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.2 }}
-              className="hero-name-gradient text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl"
+              className="hero-name-gradient inline-block pb-2 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl leading-[1.2]"
             >
               Anirudh Dhage
             </motion.h1>
